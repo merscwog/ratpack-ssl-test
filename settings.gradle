@@ -1,0 +1,4 @@
+include 'client', 'server'
+
+rootProject.name = 'ratpack-ssl-test'
+

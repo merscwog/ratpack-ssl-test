@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+mainClassName = 'SslClient'
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.4.5'
+  compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+}
+
+run {
+  systemProperties['javax.net.ssl.keyStore'] = rootProject.file('tmp_certs/client.jks') as String
+  systemProperties['javax.net.ssl.keyStorePassword'] = 'changeit'
+  systemProperties['javax.net.ssl.trustStore'] = rootProject.file('tmp_certs/truststore.jks') as String
+  systemProperties['javax.net.ssl.trustStorePassword'] = 'changeit'
+  systemProperties['javax.net.debug'] = 'ssl'
+}

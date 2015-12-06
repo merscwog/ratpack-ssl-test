@@ -1,0 +1,23 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "io.ratpack:ratpack-gradle:1.1.1"
+  }
+}
+
+apply plugin: "io.ratpack.ratpack-groovy"
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.4.5'
+  runtime "org.slf4j:slf4j-simple:1.7.12"
+}
+
+run {
+  environment['RATPACK_SERVER_SSL__KEYSTORE_FILE'] = rootProject.file('tmp_certs/server.jks') as String
+  environment['RATPACK_SERVER_SSL__KEYSTORE_PASSWORD'] = 'changeit'
+  environment['RATPACK_SERVER_SSL__TRUSTSTORE_FILE'] = rootProject.file('tmp_certs/truststore.jks') as String
+  environment['RATPACK_SERVER_SSL__TRUSTSTORE_PASSWORD'] = 'changeit'
+  systemProperties['javax.net.debug'] = 'ssl'
+}
